@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="个人简历在线展示">
+    <title>个人简历 | Personal Resume</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: #f4f5f7;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* 顶部标题区域 */
+        header {
+            text-align: center;
+            padding: 48px 20px 30px;
+        }
+
+        header h1 {
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #777;
+            font-size: 13px;
+            letter-spacing: 3px;
+        }
+
+        /* 简历图片容器 */
+        .resume-container {
+            width: min(900px, 92%);
+            margin: 0 auto 50px;
+        }
+
+        .resume-page {
+            margin-bottom: 24px;
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .resume-page img {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: zoom-in;
+        }
+
+        /* 图片放大查看 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.92);
+            padding: 30px;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 28px;
+            color: white;
+            font-size: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            padding: 0 20px 30px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 30px 16px 22px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .resume-container {
+                width: 96%;
+                margin-bottom: 30px;
+            }
+
+            .resume-page {
+                margin-bottom: 14px;
+            }
+
+            .lightbox {
+                padding: 12px;
+            }
+
+            .close-btn {
+                top: 8px;
+                right: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>个人简历</h1>
+        <p>PERSONAL RESUME</p>
+    </header>
+
+    <main class="resume-container">
+        <div class="resume-page">
+            <img
+                src="Resume1.jpg"
+                alt="个人简历第一页"
+                onclick="openImage(this)"
+            >
+        </div>
+
+        <div class="resume-page">
+            <img
+                src="Resume2.jpg"
+                alt="个人简历第二页"
+                onclick="openImage(this)"
+            >
+        </div>
+    </main>
+
+    <div
+        class="lightbox"
+        id="lightbox"
+        onclick="closeImage()"
+        role="dialog"
+        aria-label="简历图片放大查看"
+        aria-modal="true"
+    >
+        <button
+            class="close-btn"
+            aria-label="关闭图片"
+            onclick="closeImage()"
+        >&times;</button>
+        <img id="lightbox-img" src="" alt="放大后的简历">
+    </div>
+
+    <footer>
+        Personal Resume · All Rights Reserved
+    </footer>
+
+    <script>
+        function openImage(img) {
+            const lightbox = document.getElementById("lightbox");
+            const lightboxImg = document.getElementById("lightbox-img");
+
+            lightboxImg.src = img.src;
+            lightbox.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeImage() {
+            document.getElementById("lightbox").classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        // 按 Esc 键关闭放大图片
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeImage();
+            }
+        });
+    </script>
+</body>
+</html>
